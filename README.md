@@ -10,6 +10,11 @@
 
 <img width="575" alt="image" src="https://user-images.githubusercontent.com/118978642/232737052-e33159fc-2988-411f-ab84-809bea4edeb8.png">
 
+monolith architecture - entire architeture on one pysical machine. better to seperate out into components working seperatley. split architecture into two pieces which communicate with each other. that's how you get 2 tier application. can break it down even further to microservices
+
+<img width="485" alt="image" src="https://user-images.githubusercontent.com/118978642/232739150-16751849-b428-4449-b242-68e901c0f78b.png">
+
+
 
 ### What is a virtual machine?
 
