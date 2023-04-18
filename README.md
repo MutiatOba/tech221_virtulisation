@@ -136,8 +136,7 @@ in vagrant file type the following code: ```config.vm.synced_folder "app", "/hom
 the file we are targeting: app
 where in the vm we want the app file to be stored: ```/home/vagrant/app```
 
-total content of vagrant file:
----------------------------------------------------
+content of vagrant file:
 ```
 Vagrant.configure("2") do |config|
 
@@ -150,7 +149,6 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-----------------------------------
 
 Head over to Git Bash and type ```vagrant ssh``` (make sure that you are in the correct folder). Need to make sure app folder is synched to virtual machine.
 
