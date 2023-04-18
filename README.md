@@ -129,11 +129,12 @@ end
 ### Installing an app on VM using vagrant
 
 Need to get app folder into vagrant file so can run on vm.
-so need to sync the app folder with vagrant file - so a change in one it will lead to a change in the other 
+
+so need to sync the app folder with vagrant file - so a change in one file will lead to a change in the other 
 
 in vagrant file type the following code: ```config.vm.synced_folder "app", "/home/vagrant/app"```
 
-the file we are targeting: app
+the file we are targeting: ```app```
 where in the vm we want the app file to be stored: ```/home/vagrant/app```
 
 content of vagrant file:
@@ -150,8 +151,8 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Head over to Git Bash and type ```vagrant ssh``` (make sure that you are in the correct folder). Need to make sure app folder is synched to virtual machine.
+Head over to Git Bash and type ```vagrant ssh``` (make sure that you are in the correct folder where your code is saved). Need to make sure app folder is synched to virtual machine.
 
-Once the VM is running, type ```ls``` to make sure the folders is in virtual machine. Then cd to app folder and then ls to see what's inside the app folder.
+Once the VM is running, type ```ls``` to make sure the app folder is in virtual machine. Then cd to app folder and then ```ls``` to see what's inside the app folder.
 
 
