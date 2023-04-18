@@ -202,13 +202,13 @@ Whilst in your git bash app, cd into app then run the following commands:
 Go to webbrowers and type in ip_address:3000
 port - allows communicaiton between 2 computers using different protocols
 
-```
+
 
 #### provision the app
 
 Alternatively to manually updating the enviroment for the app. You can do the following:
 
-1. update the provision.sh file (this must be saved in the same folder as the app and vagrant file for the below code to work):
+1. update the provision.sh file (this must be saved in the same folder as the app and vagrant file for the below code to work). Alternatively use script in step 6:
 ```
 #!/bin/bash
 sudo apt update -y
@@ -244,7 +244,25 @@ end
 
 ```http://192.168.10.100:3000/```
 
+6. Alternativelty, skip step 4 by using the following bash script in step 1
 
+```
+#!/bin/bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install nginx -y
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+sudo apt-get install nodejs -y
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs -y
+sudo npm install pm2 -g
+cd app
+npm install
+node app.js
+```
 
 
 
