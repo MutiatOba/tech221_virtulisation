@@ -308,17 +308,22 @@ Reverse proxies are commonly used to make web applications faster and more secur
 ```
 192.168.1.100   backend-server
 ```
-5. check configuration file for errors
+5. Enable the configuration: Create a symbolic link from the sites-available directory to the sites-enabled directory to enable the new configuration file:
+```
+sudo ln -s /etc/nginx/sites-available/my-reverse-proxy /etc/nginx/sites-enabled/
+```
+
+6. check configuration file for errors
 
 ```
 sudo nginx -t
 ```
-6. relaod your nginx
+7. relaod your nginx
 
 ```
 sudo systemctl reload nginx
 ```
-7. Can now access your app from webbrowers using ip address.
+8. Can now access your app from webbrowers using ip address.
 
 
 
