@@ -1,3 +1,16 @@
+### 4 pillars of devops
+
+1. cost - this is often ovelooked.Need to make sure the company is being as efficient as possible in its tech dealings. For example, scaling and how power a machine we need to complete a task, how many servers do we actually need.
+
+2. flexibilty - its easy to get locked in to a specific prouduc. this is known as 'vendor lock-in'. this makes it harder to keep up with industry changes. everything the company uses should be easily changed or updtted as the business needs change
+
+3 Ease of use - make things as easy as possible for other to do their jobs. people wont used the tools provided it they arent easy to use. if they dont use our tools then there will be delays
+
+4. robustness - we need as close to 100% uptime of company services as possible. we as devops engineers are responsible for this.
+
+<img width="575" alt="image" src="https://user-images.githubusercontent.com/118978642/232737052-e33159fc-2988-411f-ab84-809bea4edeb8.png">
+
+
 ### What is a virtual machine?
 
 A vitual machine is the emulation of a computer system. Virtual machines are based on computer architecture and provides the functionality of a physical machine. It creates a virtualized environment that can run an operating system and execute software applications as if they were running on a physical computer. Virtual machines allow multiple operating systems to run on a single physical computer.
@@ -7,6 +20,18 @@ A vitual machine is the emulation of a computer system. Virtual machines are bas
 A set of tools, software, and configurations used by developers to create, test, and debug software applications. It usually includes programming languages, integrated development environments (IDEs), text editors, version control systems, testing frameworks, and other tools that help developers to write, test, and deploy code. 
 
 <img width="572" alt="image" src="https://user-images.githubusercontent.com/118978642/232735867-fb0b0ef3-82eb-4bac-a75b-0d1608e9f60f.png">
+
+1. user friendly, fast and robust - if not people would end up usinig something else
+
+2. as close to the production enviroment as possible. this will do away with future errors when we come to deploy
+
+3. support one application. say appliction 1 requires version 1.1 and then you have a second app that requiores version 1.5. then this could lead to comflicts. App1 might need a program that conflicts with App2
+
+4. it should be the same for everyone everywhere 
+
+5. it should be easy to update - e.g using a shell script.
+
+Vagrant allows us to achieve all 5 of these points. 
 
 ### What is the purpose of the dev env?
 
