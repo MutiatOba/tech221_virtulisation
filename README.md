@@ -264,6 +264,62 @@ npm install
 node app.js
 ```
 
+### Nginx Reverse Proxy
+
+#### what is a port?
+ a port is a communication endpoint which is used to identify an application running on a computer. Data sent over a network is broken down into packets each with a destination ip address and port number. the destination port numner is used to send the packet to the correct application or service running in the destination computers. The 2 typesof ports are TCP(reliable connection) and UDP(faster connection).
+ 
+ #### What is a reverse proxy? How is it different to a proxy?
+ 
+ A proxy server is like a middleman between your computer and the internet. It takes your requests and sends them to the destination server on your behalf, then sends the response back to your computer.
+
+A reverse proxy is a similar middleman, but instead of sending your requests to the internet, it sends them to one or more servers on a private network. The response from the server is then sent back to you through the reverse proxy server.
+
+The main difference between a regular proxy and a reverse proxy is the direction of the traffic flow. A regular proxy sits between you and the internet, while a reverse proxy sits between you and the private network.
+
+Reverse proxies are commonly used to make web applications faster and more secure. They can help distribute incoming requests across multiple servers, reducing the load on each server and improving the overall performance of the application. They can also cache frequently requested content, reducing the time it takes to load pages and improving your experience as a user.
+
+<img width="480" alt="image" src="https://user-images.githubusercontent.com/118978642/232836165-e2d0dacf-4a3b-41b0-8cb0-98eb18752bee.png">
+
+ #### What is Nginx's default configuration
+ 
+ Nginx's default configuration includes a directory called sites-available, which contains configuration files for different websites or web applications that are hosted on the server. This directory is usually located at /etc/nginx/sites-available/ on Unix-based systems, such as Linux.
+ 
+ #### steps to install reverse proxy for nginx
+ 
+ 1. make sure nginx is installed ```sudo apt-get install nginx```
+ 2. cd to the nginx configuration file: ```cd /etc/nginx/sites-available/```
+ 3. create a reverse proxy file in the folder: ```sudo nano reverse-proxy``` and include following code:
+ ```
+ server {
+    listen 80;
+    server_name 192.168.10.100;
+
+    location / {
+        proxy_pass http://192.168.10.100:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+4. cd to the /etc/hosts file and include the following code to help define the hostname in DNS:
+```
+192.168.1.100   backend-server
+```
+5. check configuration file for errors
+
+```
+sudo nginx -t
+```
+6. relaod your nginx
+
+```
+sudo systemctl reload nginx
+```
+7. Can now access your app from webbrowers using ip address.
+
 
 
 
