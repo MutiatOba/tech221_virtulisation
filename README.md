@@ -1,6 +1,6 @@
 ### 4 pillars of devops
 
-1. cost - this is often ovelooked.Need to make sure the company is being as efficient as possible in its tech dealings. For example, scaling and how power a machine we need to complete a task, how many servers do we actually need.
+1. cost - this is often ovelooked.Need to make sure the company is being as efficient as possible in its tech dealings. For example, scaling and how we power a machine we need to complete a task, how many servers do we actually need.
 
 2. flexibilty - its easy to get locked in to a specific prouduc. this is known as 'vendor lock-in'. this makes it harder to keep up with industry changes. everything the company uses should be easily changed or updtted as the business needs change
 
@@ -150,9 +150,59 @@ Vagrant.configure("2") do |config|
 
 end
 ```
+Type ``vagrant up``` in your visual studio code.
 
 Head over to Git Bash and type ```vagrant ssh``` (make sure that you are in the correct folder where your code is saved). Need to make sure app folder is synched to virtual machine.
 
 Once the VM is running, type ```ls``` to make sure the app folder is in virtual machine. Then cd to app folder and then ```ls``` to see what's inside the app folder.
+
+We need to ask the following questions as a devops:
+what framework
+what language
+what version of packages
+what wil the app look like
+
+This is because, we need to make sure that our enviroment is the correct one needed for the app.
+
+On visual studio code, check the enviroment folder as we need to run a test to check our enviromenet is correct. The test is in spec test folder.
+
+The test will be run using ruby, so need to make sure ruby is installed.
+
+Whilst in visual studio code, cd into spec test folder in our enviroment folder.
+
+Type the following commands in visual studio terminal: 
+
+- ```gem install bundler``` - allows us to bundle all test together
+- ```bundle``` - bundles all the test
+- ```rake spec``` - this is the command developers created, which will run test. it starts all the tests. if doesnt work then type in ```gem install serverspec```
+
+if the test is run successfully it will show that we need the following:
+
+need nodejs 
+need nodejs version 6
+need pm2
+
+go to git bash and type the following commands: 
+
+- ```sudo apt-get install nodejs -y``` - installs nodejs
+- ```sudo apt-get install python-software-properties``` - The "python-software-properties" package provides a tool called "add-apt-repository" which is used to add new software repositories to the system's package sources list.
+- grabs the version of nodejs that we want: ```curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -```
+- puts version 6 in affect: ```sudo apt-get install nodejs -y```
+- checks the version of node: ```nodejs --version```
+
+pm2 - used to unpackage the app. its package manager for nodejs. type the following in git bash app to install it:
+ 
+```sudo npm install pm2 -g```
+
+Whilst in your git bash app, cd into app then run the following commands:
+
+- ```npm install``` - used to install Node.js packages or dependencies for a Node.js projec
+- ```node app.js``` -  is used to run a Node.js application called "app.js
+
+Go to webbrowers and type in ip_address:3000
+
+```
+
+port - allows communicaiton between 2 computers using different protocols
 
 
