@@ -310,7 +310,7 @@ Reverse proxies are commonly used to make web applications faster and more secur
 ```
 5. Enable the configuration: Create a symbolic link from the sites-available directory to the sites-enabled directory to enable the new configuration file:
 ```
-sudo ln -s /etc/nginx/sites-available/my-reverse-proxy /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/reverse-proxy /etc/nginx/sites-enabled/
 ```
 
 6. check configuration file for errors
