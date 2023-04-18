@@ -200,9 +200,52 @@ Whilst in your git bash app, cd into app then run the following commands:
 - ```node app.js``` -  is used to run a Node.js application called "app.js
 
 Go to webbrowers and type in ip_address:3000
+port - allows communicaiton between 2 computers using different protocols
 
 ```
 
-port - allows communicaiton between 2 computers using different protocols
+#### provision the app
+
+Alternatively to manually updating the enviroment for the app. You can do the following:
+
+1. update the provision.sh file (this must be saved in the same folder as the app and vagrant file for the below code to work):
+```
+#!/bin/bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install nginx -y
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+sudo apt-get install nodejs -y
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs -y
+sudo npm install pm2 -g
+```
+2. make sure your vagrant file has been updated to reference the script and to sync with the app. The final file should look like so:
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.network "private_network", ip: "192.168.10.100"
+  config.vm.provision "shell", path: "provision.sh"
+
+  #syncing the app folders
+  config.vm.synced_folder "app", "/home/vagrant/app"
+
+end
+3. type ```vagrant up``` in the vs code and then ```vagrant ssh``` in git bash
+
+4. make sure you cd to the app folder and then type the following two commands to launch the app: 
+- ```npm install``` - used to install Node.js packages or dependencies for a Node.js projec
+- ```node app.js``` -  is used to run a Node.js application called "app.js
+
+5. head over to a web brower and type your ipadress:3000 to see your new app, like so:
+
+```http://192.168.10.100:3000/```
+
+
+
+
 
 
