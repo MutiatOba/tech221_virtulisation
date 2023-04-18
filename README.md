@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-2. type ```vagrant up``` in virtual studio code. this uses the instructions in your virtual file to create the virtual machine in virtual box 
+2. type ```vagrant up``` in virtual studio code. this uses the instructions in your vagrant file to create the virtual machine in virtual box 
 
 3. to access your virtual machine, go to your Git Bash, cd to the relevant folder and type ```virtual ssh``. This takes you to your virtual machine. 
 
@@ -67,7 +67,7 @@ To check if your ip is working properly, type your ip address in a webbrowser. i
 
 6. Alternatively to manual inputting the linux commands, to create a script that runs when spinning up a Vagrant virtual machine (VM), you can follow these steps (https://developer.hashicorp.com/vagrant/docs/provisioning/shell):
 
-- create a script in the same folder as your vagrant file. make sure to save it as a .sh file:
+- create a script file in the same folder as your vagrant file. make sure to save it as a .sh file:
 ```
 #!/bin/bash
 sudo apt update -y
