@@ -6,7 +6,7 @@ A vitual machine is the emulation of a computer system. Virtual machines are bas
 
 A set of tools, software, and configurations used by developers to create, test, and debug software applications. It usually includes programming languages, integrated development environments (IDEs), text editors, version control systems, testing frameworks, and other tools that help developers to write, test, and deploy code. 
 
-image.png
+<img width="572" alt="image" src="https://user-images.githubusercontent.com/118978642/232735867-fb0b0ef3-82eb-4bac-a75b-0d1608e9f60f.png">
 
 ### What is the purpose of the dev env?
 
@@ -15,7 +15,7 @@ image.png
 
 ### Vagrant
 
-image.png
+<img width="574" alt="image" src="https://user-images.githubusercontent.com/118978642/232735775-016f0584-18c6-42d6-b8c2-1f1504a6d03d.png">
 
 Virtual box is what we use to make virtual machines.
 
