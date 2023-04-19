@@ -464,3 +464,33 @@ end
 
 5. check that mongodb is running by typing the following: ```sudo systemctl status mongod```
 
+### running processes in the background
+
+To run a process in the backgound, type the command followed by &, so for example:
+```
+npm install &
+node app.js &
+```
+The provision.sh file for your app can therefore be updated as follows:
+
+```
+#!/bin/bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install nginx -y
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+# to install dependencies for app
+sudo apt-get install nodejs -y
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs -y
+sudo npm install pm2 -g
+cd app
+npm install &
+node app.js &
+```
+
+
+
+
