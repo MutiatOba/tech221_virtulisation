@@ -412,5 +412,52 @@ to install mongodb: ```sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-se
 start mongodb: sudo systemctl start mongod
 check status: sudo systemctl status mongod
 
+### automate process of launch mongdo when launching vm
 
+1. create a provision.sh file. make sure if it is saved in the same location as any other provision files that it is given a different name. Alternatively, it is best practice to save a second provision file in an alternative location.
+The content of the provision.sh file for the db is as follows:
+
+```
+#!/bin/bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA31292
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+sudo systemctl start mongod
+``` 
+
+2. update your vagrant file to include the following:
+```
+db.vm.provision "shell", path: "~/Documents/tech221_virtualisation/environment/provision.sh"
+
+```
+your vagrant file should look like so:
+```
+Vagrant.configure("2") do |config|
+
+  config.vm.define "app" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.network "private_network", ip: "192.168.10.100"
+    app.vm.provision "shell", path: "provision.sh"
+    #syncing the app folders
+    app.vm.synced_folder "app", "/home/vagrant/app"
+  end
+
+  config.vm.define "db" do |db|
+    db.vm.box = "ubuntu/xenial64"
+    db.vm.network "private_network", ip: "192.168.10.150"
+    db.vm.provision "shell", path: "~/Documents/tech221_virtualisation/environment/provision.sh"
+  end
+
+end
+```
+
+3. launch the vm for the db by typing: ```vagrant up db```
+
+4. head to git bash and cd to the relevant folder, then type ```vagrant ssh db```
+
+5. check that mongodb is running by typing the following: ```sudo systemctl status mongod```
 
