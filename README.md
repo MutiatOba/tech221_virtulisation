@@ -56,11 +56,11 @@ Vagrants gives the instructions to virtual box and standardises what is in the v
 You will need to use both the terminal in your visual studio code and your Git Bash app.
 
 You need to install the following:
-Vagrant
-Virtual box
-ruby
-bash 
-virtual studio code
+- Vagrant
+- Virtual box
+- ruby
+- git bash 
+- virtual studio code
 
 1. in your virtual studio code type ```vagrant init``` this will create a vagrant file. this file is used to config the virtual machines on virtual box. the vagrant file is wriiten in ruby. below is the intial content of a vagrant file. note we changed the vm.box to ubuntu as this is the operating system we want to use.
 ```
@@ -72,7 +72,7 @@ end
 ```
 2. type ```vagrant up``` in virtual studio code. this uses the instructions in your vagrant file to create the virtual machine in virtual box 
 
-3. to access your virtual machine, go to your Git Bash, cd to the relevant folder and type ```virtual ssh``. This takes you to your virtual machine. 
+3. to access your virtual machine, go to your Git Bash, cd to the relevant folder and type ```vagrant ssh``. This takes you to your virtual machine. 
 
 4. update and upgrade your virual machine using the following linux commands (do this in Git Bash app):
 ```
@@ -121,7 +121,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-- type ```vagrant up``` in your visual studio code terminal
+- if you have your vm running you might want to terminate it using ```vagrant destroy``` in visual studio. Then type ```vagrant up``` in your visual studio code terminal
 
 7. to terminate your vagrant virtual machine type ```vagrant destroy```. Alternatively, to pause it type ```vagrant halt```. This can be typed in your virtual studio code
 
@@ -157,10 +157,10 @@ Head over to Git Bash and type ```vagrant ssh``` (make sure that you are in the 
 Once the VM is running, type ```ls``` to make sure the app folder is in virtual machine. Then cd to app folder and then ```ls``` to see what's inside the app folder.
 
 We need to ask the following questions as a devops:
-what framework
-what language
-what version of packages
-what wil the app look like
+- what framework
+- what language
+- what version of packages
+- what wil the app look like
 
 This is because, we need to make sure that our enviroment is the correct one needed for the app.
 
@@ -178,9 +178,9 @@ Type the following commands in visual studio terminal:
 
 if the test is run successfully it will show that we need the following:
 
-need nodejs 
-need nodejs version 6
-need pm2
+- need nodejs 
+- need nodejs version 6
+- need pm2
 
 go to git bash and type the following commands: 
 
@@ -287,7 +287,7 @@ Reverse proxies are commonly used to make web applications faster and more secur
  
  #### steps to install reverse proxy for nginx
  
- 1. make sure nginx is installed ```sudo apt-get install nginx```
+ 1. make sure nginx is installed ```sudo apt-get install nginx``` and your server is up and running.
  2. cd to the nginx configuration file: ```cd /etc/nginx/sites-available/```
  3. create a reverse proxy file in the folder: ```sudo nano reverse-proxy``` and include following code:
  ```
