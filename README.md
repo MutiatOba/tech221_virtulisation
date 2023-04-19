@@ -492,7 +492,7 @@ cd app
 npm install &
 node app.js &
 ```
-To use pm2 to run the nodejs app as a background process:
+To use pm2 to run the nodejs app as a background process [PROCESS TO BE REVISED AS NOT WORKING YET!]:
 
 1. make sure that you have pm2 installed: ```sudo npm install pm2 -g```
 2. install dependencies for node.js ```npm install```
