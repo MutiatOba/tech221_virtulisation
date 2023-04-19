@@ -336,7 +336,8 @@ Need to name the VM: go to vagrant file and add this line:
 
 everything under the above code is defined under app. see full content of vagrant file below:
 
-```Vagrant.configure("2") do |config|
+```
+Vagrant.configure("2") do |config|
 
   config.vm.define "app" do |app|
     app.vm.box = "ubuntu/xenial64"
@@ -345,7 +346,8 @@ everything under the above code is defined under app. see full content of vagran
     #syncing the app folders
     app.vm.synced_folder "app", "/home/vagrant/app"
   end
-end ```
+end 
+```
 
 Then type ```vagrant up``` to create the vm.
 
@@ -403,7 +405,7 @@ Once you have ssh'ed in db vm (doing ```vagrant ssh db```), type the following c
 
 now that we have the key, need to get packages we need for mongodb so run the following commands:
 - ```sudo apt update -y``` 
-```sudo apt upgrate -y``` 
+- ```sudo apt upgrate -y``` 
 
 
 to install mongodb: ```sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20```
@@ -435,6 +437,7 @@ db.vm.provision "shell", path: "~/Documents/tech221_virtualisation/environment/p
 
 ```
 your vagrant file should look like so:
+
 ```
 Vagrant.configure("2") do |config|
 
