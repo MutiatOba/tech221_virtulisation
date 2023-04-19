@@ -495,7 +495,7 @@ node app.js &
 To use pm2 to run the nodejs app as a background process [PROCESS TO BE REVISED AS NOT WORKING YET!]:
 
 1. make sure that you have pm2 installed: ```sudo npm install pm2 -g```
-2. install dependencies for node.js ```npm install```
+2. [install dependencies for node.js ```npm install```] NOT REQUIRED
 3. start the app process with pm2: 
 ```pm2 start app.js```
 4. To check the status of your PM2 processes: ```pm2 status```. To stop a PM2 process: ```pm2 stop your_process_name``` .
