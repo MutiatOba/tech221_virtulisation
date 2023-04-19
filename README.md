@@ -224,6 +224,7 @@ sudo apt-get install nodejs -y
 sudo npm install pm2 -g
 ```
 2. make sure your vagrant file has been updated to reference the script and to sync with the app. The final file should look like so:
+```
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/xenial64"
@@ -234,6 +235,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "app", "/home/vagrant/app"
 
 end
+```
 3. type ```vagrant up``` in the vs code and then ```vagrant ssh``` in git bash
 
 4. make sure you cd to the app folder and then type the following two commands to launch the app: 
