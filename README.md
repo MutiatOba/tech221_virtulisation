@@ -281,7 +281,8 @@ The main difference between a regular proxy and a reverse proxy is the direction
 
 Reverse proxies are commonly used to make web applications faster and more secure. They can help distribute incoming requests across multiple servers, reducing the load on each server and improving the overall performance of the application. They can also cache frequently requested content, reducing the time it takes to load pages and improving your experience as a user.
 
-<img width="480" alt="image" src="https://user-images.githubusercontent.com/118978642/232836165-e2d0dacf-4a3b-41b0-8cb0-98eb18752bee.png">
+<img width="482" alt="image" src="https://user-images.githubusercontent.com/118978642/233035064-ab0dc3ae-482c-431d-989b-fac7a1cdba0d.png">
+
 
  #### What is Nginx's default configuration
  
