@@ -464,7 +464,7 @@ end
 
 5. check that mongodb is running by typing the following: ```sudo systemctl status mongod```
 
-### running processes in the background
+### running processes in the background on linux
 
 To run a process in the backgound, type the command followed by &, so for example:
 ```
@@ -490,6 +490,14 @@ cd app
 npm install &
 node app.js &
 ```
+To use pm2 to run the nodejs app as a background process:
+
+1. make sure that you have pm2 installed: ```sudo npm install pm2 -g```
+2. install dependencies for node.js ```npm install```
+3. start the app process with pm2: 
+```sudo pm2 start node app.js```
+
+
 
 
 
