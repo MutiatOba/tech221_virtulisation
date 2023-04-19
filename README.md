@@ -328,6 +328,89 @@ sudo systemctl reload nginx
 ```
 8. Can now access your app from webbrowers using ip address.
 
+### Naming the VM
+
+Need to name the VM: go to vagrant file and add this line:
+
+```config.vm.define "app" do |app|```
+
+everything under the above code is defined under app. see full content of vagrant file below:
+
+```Vagrant.configure("2") do |config|
+
+  config.vm.define "app" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.network "private_network", ip: "192.168.10.100"
+    app.vm.provision "shell", path: "provision.sh"
+    #syncing the app folders
+    app.vm.synced_folder "app", "/home/vagrant/app"
+  end
+end ```
+
+Then type ```vagrant up``` to create the vm.
+
+### create a second vm - for our database
+
+Update vagrant file as follows:
+
+```
+Vagrant.configure("2") do |config|
+
+  config.vm.define "app" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.network "private_network", ip: "192.168.10.100"
+    app.vm.provision "shell", path: "provision.sh"
+    #syncing the app folders
+    app.vm.synced_folder "app", "/home/vagrant/app"
+  end
+
+  config.vm.define "db" do |db|
+    db.vm.box = "ubuntu/xenial64"
+    db.vm.network "private_network", ip: "192.168.10.150"
+  end
+
+end
+```
+
+before launching thr vm make sure to remove the following from your provision file as this will prevent the second vm from setting up:
+```
+#cd app
+#npm install
+#node app.js
+
+```
+
+Then write ```vagrant up``` to create the two VMs
+
+The benefit of vagrant file. create a test enviroment when it is needed. if we give dev vagrant file then all devs are working on the same enviroment. if we make the production the same as dev enviroment then unlikely to have as many errors. 
+
+to get into the first vm type ```vagrant ssh app``` in git bash. if you do ```ls``` you should see your app
+
+open a second git bash to login into database (make sure you are in the correct folder where your vagrant file is) and type ```vagrant ssh db```
+
+
+### setting up mongodb
+
+to launch your db vm only type: ```vagrant up db```
+
+Once you have ssh'ed in db vm (doing ```vagrant ssh db```), type the following commands:
+
+- ```sudo apt update -y``` - to update the vm
+- ```sudo apt upgrate -y``` - to install all updates 
+- ```sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927``` - its adding a key for mongodb as mongdo requires a key to be downloaded 
+
+- ```echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list``` - basically saying that you have the key and know where to go and use it
+
+now that we have the key, need to get packages we need for mongodb so run the following commands:
+- ```sudo apt update -y``` 
+```sudo apt upgrate -y``` 
+
+
+to install mongodb: ```sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20```
+
+
+start mongodb: sudo systemctl start mongod
+check status: sudo systemctl status mongod
 
 
 
