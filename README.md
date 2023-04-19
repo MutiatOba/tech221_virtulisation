@@ -500,26 +500,6 @@ To use pm2 to run the nodejs app as a background process:
 ```pm2 start app.js```
 4. To check the status of your PM2 processes: ```pm2 status```. To stop a PM2 process: ```pm2 stop your_process_name``` .
 
-Your provision.sh file for your app should look like follows:
-
-```
-#!/bin/bash
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt install nginx -y
-sudo systemctl restart nginx
-sudo systemctl enable nginx
-# to install dependencies for app
-sudo apt-get install nodejs -y
-sudo apt-get install python-software-properties
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install nodejs -y
-sudo npm install pm2 -g
-cd app
-npm install 
-pm2 start app.js
-
-```
 
 
 
