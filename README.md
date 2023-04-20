@@ -605,3 +605,14 @@ to check if the variable has been created: ```printenv DB_HOST```
 
 go to webbrower and type the following: ip:3000/posts
 
+#### edit the mongod.conf via your db provision file
+
+Update the db provision file to include the following commands:
+```
+sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+```
+Then continue with the above steps starting from and including step 5.
+
+
