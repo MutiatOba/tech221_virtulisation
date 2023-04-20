@@ -527,93 +527,81 @@ pm2 start app.js
 ```
 
 ### connecting app to db
-
-provision file:
-
+1. Make sure your provision file for your app is like so:
+```
 #!/bin/bash
-
 # Provisioning for app vm
-
 # Update the sources list
-
 sudo apt-get update -y
-
 # upgrade any packages available
-
 sudo apt-get upgrade -y
-
 # install nginx
-
 sudo apt-get install nginx -y
-
 # install git
-
 sudo apt-get install git -y
-
 # install nodejs
-
 sudo apt-get install python-software-properties
-
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-
 sudo apt-get install nodejs -y
-
 # install pm2
-
 sudo npm install pm2 -g
+```
+2. launch the app and db vms in two different git bash:
 
+- ```vagrant ssh db```
+- ```vagrant ssh app```
 
+3. check app and db vms are properly installed 
 
-launch vms:
-- vagrant ssh db
-- vagrant ssh app
+To check that your app vm is running correctly, check the following:
 
-on app vm check:
-- ls: to check app
-- nodejs --version 
-- pm2 --version
+- ```ls```: to check  that the app folder is there
+- ```nodejs --version ``` : to check that node has been properly installed
+- ```pm2 --version```: to check that pm2 has been properly installed
 
-on db vm check:
-sudo systemctl status mongod
+On db vm check that mongodb is up and running:
+```sudo systemctl status mongod```
 
-we need to connect db vm with application vm. 
+4. we need to connect db vm with app vm. 
 
-go to db vm, and type:
+go to db vm, and type: ```sudo nano /etc/mongod.conf```
 
-sudo nano /etc/mongod.conf
+In the file get to #network interfaces section then change bindIP:0.0.0.0 (saying that all ips can access our database, fine to do this as we are working in dev enviroment). Then save changes. 
 
-In the file get to #network interfaces. need to change bindIP:0.0.0.0 (saying what ip can access our database, fine to use as working in dev enviroment). Then save changes. 
+As mongodb is running we need to restart it so it can implement the changes.
 
-as mongodb is running we need to restart it so it can implement the changes.
-
-sudo systemctl restart mongod
-sudo systemctl enable mongod: if we restart vm it will put changes into effect
+```sudo systemctl restart mongod```
+```sudo systemctl enable mongod```: if we restart vm it will put changes into effect
 
 to check that the changes have been made do ```sudo systemctl status mongod```
 
 ctrl+z to get out of it.
 
-head over to app vm:
+5. make changes in app vm
+
+head over to app vm.
+
 need to create a variable to connect db to app
-sudo nano .bashrc
-scroll to bottom
 
-the developers have create an enviroment variable called db+host. after == specify where we want to conenct to the db
+type: ```sudo nano .bashrc``` this is to create an enviroment variable
 
-export DB_HOST=mongodb://192.168.10.150:27017/posts
+scroll to bottom of the file. Note: the developers have create an enviroment variable called db_host. after == specify where we want to conenct to the db
 
-printenv DB_HOST
+insert the following into the bottom of the file:
+```export DB_HOST=mongodb://192.168.10.150:27017/posts```
 
-source .bashrc (re run because of the new changes)
+to check if the variable has been created: ```printenv DB_HOST```
 
-printenv DB_HOST
+```source .bashrc``` (re run to reflect the new changes)
 
-cd app
-npm install
+```printenv DB_HOST```: then you should see the newly created variable.
 
-node seeds/seed.js - puts all the data into mongodb. asking nodejs to run the seed.js file
+6. install the relevant dependancies for the app
 
-start app: node app.js
+- ```cd app```
+- ```npm install```
+- ```node seeds/seed.js```: this puts all the data into mongodb. asking nodejs to run the seed.js file
+- ```start app: node app.js```
 
-go to webbrowers: ip:3000/posts
+go to webbrower and type the following: ip:3000/posts
 
