@@ -47,6 +47,11 @@ image.png
 
 <img width="574" alt="image" src="https://user-images.githubusercontent.com/118978642/232735775-016f0584-18c6-42d6-b8c2-1f1504a6d03d.png">
 
+#### launch multiple vms
+
+<img width="608" alt="image" src="https://user-images.githubusercontent.com/118978642/233355477-cde9db33-d813-4408-a00c-f71b7fea1346.png">
+
+
 Virtual box is what we use to make virtual machines.
 
 Vagrants gives the instructions to virtual box and standardises what is in the virtual box. it sends instrction to the virtual box about the type of machine that we want.
@@ -520,3 +525,95 @@ cd app
 pm2 start app.js
 
 ```
+
+### connecting app to db
+
+provision file:
+
+#!/bin/bash
+
+# Provisioning for app vm
+
+# Update the sources list
+
+sudo apt-get update -y
+
+# upgrade any packages available
+
+sudo apt-get upgrade -y
+
+# install nginx
+
+sudo apt-get install nginx -y
+
+# install git
+
+sudo apt-get install git -y
+
+# install nodejs
+
+sudo apt-get install python-software-properties
+
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+sudo apt-get install nodejs -y
+
+# install pm2
+
+sudo npm install pm2 -g
+
+
+
+launch vms:
+- vagrant ssh db
+- vagrant ssh app
+
+on app vm check:
+- ls: to check app
+- nodejs --version 
+- pm2 --version
+
+on db vm check:
+sudo systemctl status mongod
+
+we need to connect db vm with application vm. 
+
+go to db vm, and type:
+
+sudo nano /etc/mongod.conf
+
+In the file get to #network interfaces. need to change bindIP:0.0.0.0 (saying what ip can access our database, fine to use as working in dev enviroment). Then save changes. 
+
+as mongodb is running we need to restart it so it can implement the changes.
+
+sudo systemctl restart mongod
+sudo systemctl enable mongod: if we restart vm it will put changes into effect
+
+to check that the changes have been made do ```sudo systemctl status mongod```
+
+ctrl+z to get out of it.
+
+head over to app vm:
+need to create a variable to connect db to app
+sudo nano .bashrc
+scroll to bottom
+
+the developers have create an enviroment variable called db+host. after == specify where we want to conenct to the db
+
+export DB_HOST=mongodb://192.168.10.150:27017/posts
+
+printenv DB_HOST
+
+source .bashrc (re run because of the new changes)
+
+printenv DB_HOST
+
+cd app
+npm install
+
+node seeds/seed.js - puts all the data into mongodb. asking nodejs to run the seed.js file
+
+start app: node app.js
+
+go to webbrowers: ip:3000/posts
+
