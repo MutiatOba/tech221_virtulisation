@@ -303,7 +303,7 @@ node app.js
 ### Nginx Reverse Proxy
 
 #### what is a port?
- a port is a communication endpoint which is used to identify an application running on a computer. Data sent over a network is broken down into packets each with a destination ip address and port number. the destination port numner is used to send the packet to the correct application or service running in the destination computers. The 2 typesof ports are TCP(reliable connection) and UDP(faster connection).
+ a port is a communication endpoint which is used to identify an application running on a computer. Data sent over a network is broken down into packets each with a destination ip address and port number. the destination port numner is used to send the packet to the correct application or service running in the destination computers. The 2 types of ports are TCP(reliable connection) and UDP(faster connection).
  
  #### What is a reverse proxy? How is it different to a proxy?
  
@@ -341,26 +341,25 @@ Reverse proxies are commonly used to make web applications faster and more secur
     }
 }
 ```
-4. cd to the /etc/hosts file and include the following code to help define the hostname in DNS:
-```
-192.168.1.100   backend-server
-```
-5. Enable the configuration: Create a symbolic link from the sites-available directory to the sites-enabled directory to enable the new configuration file:
+This configuration will listen on port 80 for requests to your domain and forward them to the local port 3000
+
+4. Enable the configuration: Create a symbolic link from the sites-available directory to the sites-enabled directory to enable the new configuration file:
 ```
 sudo ln -s /etc/nginx/sites-available/reverse-proxy /etc/nginx/sites-enabled/
 ```
 
-6. check configuration file for errors
+5. check configuration file for errors
 
 ```
 sudo nginx -t
 ```
-7. relaod your nginx
+6. relaod your nginx
 
 ```
-sudo systemctl reload nginx
+sudo systemctl restart nginx
+
 ```
-8. Can now access your app from webbrowers using ip address.
+7. Can now access your app from webbrowers using ip address.
 
 ### Naming the VM
 
