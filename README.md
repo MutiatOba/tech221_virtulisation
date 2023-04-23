@@ -1,22 +1,24 @@
 ### 4 pillars of devops
 
-1. cost - this is often ovelooked.Need to make sure the company is being as efficient as possible in its tech dealings. For example, scaling and how we power a machine we need to complete a task, how many servers do we actually need.
+1. cost: this is often ovelooked. It is best to make sure that the company is being as efficient as possible in its tech dealings. For example, not over provisioning servers when it isnt required.
 
-2. flexibilty - its easy to get locked in to a specific prouduc. this is known as 'vendor lock-in'. this makes it harder to keep up with industry changes. everything the company uses should be easily changed or updtted as the business needs change
+2. flexibilty: it's easy to get locked in to a specific product. This is known as 'vendor lock-in'. This makes it harder to keep up with industry changes. Everything the company uses should be easily changed or updated as the business needs change.
 
-3 Ease of use - make things as easy as possible for other to do their jobs. people wont used the tools provided it they arent easy to use. if they dont use our tools then there will be delays
+3. ease of use: make things as easy as possible for other to do their jobs. People wont used the tools provided it they aren't easy to use. If they don't use our tools then there will be delays.
 
-4. robustness - we need as close to 100% uptime of company services as possible. we as devops engineers are responsible for this.
+4. robustness: we need as close to 100% uptime of company services as possible. We as devops engineers are responsible for this.
 
 <img width="575" alt="image" src="https://user-images.githubusercontent.com/118978642/232737052-e33159fc-2988-411f-ab84-809bea4edeb8.png">
 
-monolith architecture - entire architeture on one pysical machine. better to seperate out into components working seperatley. split architecture into two pieces which communicate with each other. that's how you get 2 tier application. can break it down even further to microservices
+Monolith architecture - entire architeture on one pysical machine. It's better to seperate out the architecture into components working seperatley. You can split architecture into two pieces which communicate with each other. That's how you get a 2 tier application. The architecture can be broken down even further into microservices.
 
 <img width="485" alt="image" src="https://user-images.githubusercontent.com/118978642/232739150-16751849-b428-4449-b242-68e901c0f78b.png">
 
 
 
 ### What is a virtual machine?
+
+Virtualisation allows you to run multiple "virtual" machines or environments on a single physical machine.
 
 A vitual machine is the emulation of a computer system. Virtual machines are based on computer architecture and provides the functionality of a physical machine. It creates a virtualized environment that can run an operating system and execute software applications as if they were running on a physical computer. Virtual machines allow multiple operating systems to run on a single physical computer.
 
@@ -30,7 +32,7 @@ A set of tools, software, and configurations used by developers to create, test,
 
 2. as close to the production enviroment as possible. this will do away with future errors when we come to deploy
 
-3. support one application. say appliction 1 requires version 1.1 and then you have a second app that requiores version 1.5. then this could lead to comflicts. App1 might need a program that conflicts with App2
+3. support one application. say appliction 1 requires version 1.1 of a software and then you have a second app that requiores version 1.5. then this could lead to comflicts. App1 might need a program that conflicts with App2
 
 4. it should be the same for everyone everywhere 
 
@@ -43,6 +45,14 @@ Vagrant allows us to achieve all 5 of these points.
 It provide a separate and controlled environment for software developers to write, test, and debug their code without affecting the production environment.  It also enables them to catch and fix errors and bugs before they make it to the production environment.
 image.png
 
+Vagrant is a tool that allows you to create and configure development environments. It automates the process of setting up a virtual machine and configuring it with the necessary software and settings, making it easy to create and share development environments with others.
+
+Vagrant uses a virtualization provider, such as VirtualBox, to create and manage the virtual machines. VirtualBox is a free and open-source virtualization software that allows you to create and run virtual machines on your computer. Vagrant is designed to work seamlessly with VirtualBox.
+
+When you use Vagrant, you can define a virtual machine configuration in a Vagrantfile, which is a simple text file that specifies the settings and software that should be installed on the virtual machine. Vagrant then uses VirtualBox (or another virtualization provider) to create the virtual machine based on the configuration specified in the Vagrantfile. This allows you to easily and quickly set up and manage development environments, without having to manually configure and manage virtual machines.
+
+To share a dev enviroment created with vagrant, you can use Vagrant share.
+
 ### Vagrant
 
 <img width="574" alt="image" src="https://user-images.githubusercontent.com/118978642/232735775-016f0584-18c6-42d6-b8c2-1f1504a6d03d.png">
@@ -54,7 +64,7 @@ image.png
 
 Virtual box is what we use to make virtual machines.
 
-Vagrants gives the instructions to virtual box and standardises what is in the virtual box. it sends instrction to the virtual box about the type of machine that we want.
+Vagrants gives the instructions to virtual box and standardises what is in the virtual box. it sends instruction to the virtual box about the type of machine that we want.
 
 ### creating virtual machines with vagrant
 
@@ -67,7 +77,7 @@ You need to install the following:
 - git bash 
 - virtual studio code
 
-1. in your virtual studio code type ```vagrant init``` this will create a vagrant file. this file is used to config the virtual machines on virtual box. the vagrant file is wriiten in ruby. below is the intial content of a vagrant file. note we changed the vm.box to ubuntu as this is the operating system we want to use.
+1. Cd to the correct folder in your file system. Then, in your virtual studio code type ```vagrant init``` this will create a vagrant file. this file is used to config the virtual machines on virtual box. the vagrant file is wriiten in ruby. below is the intial content of a vagrant file. note we changed the vm.box to ubuntu as this is the operating system we want to use.
 ```
 Vagrant.configure("2") do |config|
 
@@ -79,7 +89,7 @@ end
 
 3. to access your virtual machine, go to your Git Bash, cd to the relevant folder and type ```vagrant ssh``. This takes you to your virtual machine. 
 
-4. update and upgrade your virual machine using the following linux commands (do this in Git Bash app):
+4. update and upgrade your virual machine using the following linux commands (can do this in Git Bash app - can run as a script or run the individual commands):
 ```
 #!/bin/bash
 sudo apt update -y
@@ -88,16 +98,20 @@ sudo apt install nginx -y
 sudo systemctl restart nginx
 sudo systemctl enable nginx
 ```
+We first update the list of packages, then upgrade downloads the packages. the -y flag is used to automatically answer yes to any prompts that may appear. the restart command restarts NGINX service after it has been installed ensuring that any changes to the cnfiguration files or software itself takes effect. the enable command eneables nginx service to start automatically when the system boots up. so dont have to manually start the service everytime you start your machine.  
+
 5. you need an ip address for your vm, to get this, you need to update your vagrant file (done in visual studio code). below we have used a private ip address. then type ```vagrant reload``` in your visual studio code then ```vagrant ssh``` in your Git Bash app. 
 
 ```
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/xenial64"
-  config.vm.network "private_network" ip: "192.168.10.100"
+  config.vm.network "private_network", ip: "192.168.10.100"
 
 end
 ```
+If you have made changes to the Vagrantfile after the virtual machine has already been created and provisioned, you can apply those changes to the running virtual machine without having to stop and restart it by using the vagrant reload command. Once the virtual machine has finished reloading, you can connect to it via SSH using the command vagrant ssh.
+
 To check if your ip is working properly, type your ip address in a webbrowser. if it is working properly then you should see the nginx brand. 
 
 6. Alternatively to manual inputting the linux commands, to create a script that runs when spinning up a Vagrant virtual machine (VM), you can follow these steps (https://developer.hashicorp.com/vagrant/docs/provisioning/shell):
@@ -126,7 +140,6 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-- if you have your vm running you might want to terminate it using ```vagrant destroy``` in visual studio. Then type ```vagrant up``` in your visual studio code terminal
 
 7. to terminate your vagrant virtual machine type ```vagrant destroy```. Alternatively, to pause it type ```vagrant halt```. This can be typed in your virtual studio code
 
