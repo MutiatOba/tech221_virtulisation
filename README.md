@@ -100,6 +100,8 @@ sudo systemctl enable nginx
 ```
 We first update the list of packages, then upgrade downloads the packages. the -y flag is used to automatically answer yes to any prompts that may appear. the restart command restarts NGINX service after it has been installed ensuring that any changes to the cnfiguration files or software itself takes effect. the enable command eneables nginx service to start automatically when the system boots up. so dont have to manually start the service everytime you start your machine.  
 
+NGINX is a powerful and flexible web server that has become a popular choice for serving web content, proxying requests, and load balancing traffic due to its high performance and advanced features. Think of a web server as a virtual waiter in a restaurant. When a user types a web address (URL) into their browser, it's like a customer placing an order. The browser sends a request to the web server, just as a customer would place an order with a waiter. The web server then processes the request and sends the requested web page back to the user's browser, just as a waiter would bring the requested dish to a customer's table.
+
 5. you need an ip address for your vm, to get this, you need to update your vagrant file (done in visual studio code). below we have used a private ip address. then type ```vagrant reload``` in your visual studio code then ```vagrant ssh``` in your Git Bash app. 
 
 ```
@@ -139,12 +141,24 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-
+To effect these changes, first destroy your vm: ```vagrant destroy``` then relauch the vm: ```vagrant up```. Then ```vagrant ssh``` to access the virtual machine. 
 
 7. to terminate your vagrant virtual machine type ```vagrant destroy```. Alternatively, to pause it type ```vagrant halt```. This can be typed in your virtual studio code
 
 
 ### Installing an app on VM using vagrant
+
+To determine what development environment is required for a simple app created by a developer using Vagrant and VirtualBox, you can start by looking at the application's dependencies.
+
+The developer should provide a list of the application's dependencies, including the programming language and any libraries or frameworks required to run the application. You can use this information to identify the necessary software components that need to be installed on the virtual machine.
+
+In addition to the application's dependencies, you should also consider the operating system and other software requirements. For example, if the application is designed to run on a Linux operating system, you will need to install a Linux distribution on the virtual machine.
+
+Once you have identified the required software components, you can create a Vagrantfile that specifies the necessary configuration for the virtual machine. This may include specifying the operating system, installing software packages, setting up network interfaces, and configuring shared folders.
+
+Finally, you can use the Vagrantfile to create the virtual machine and provision it with the necessary software components. The developer can then use the virtual machine to develop and test the application in an environment that closely matches the production environment.
+
+STEPS: 
 
 Need to get app folder into vagrant file so can run on vm.
 
@@ -200,6 +214,8 @@ if the test is run successfully it will show that we need the following:
 - need nodejs version 6
 - need pm2
 
+Node.js well-suited for building real-time applications such as chat applications, gaming servers, and streaming applications.
+
 go to git bash and type the following commands: 
 
 - ```sudo apt-get install nodejs -y``` - installs nodejs
@@ -210,7 +226,7 @@ go to git bash and type the following commands:
 
 pm2 - used to unpackage the app. its package manager for nodejs. type the following in git bash app to install it:
  
-```sudo npm install pm2 -g```
+```sudo npm install pm2 -g``` - when you run this command, you are telling npm to install the PM2 process manager globally on your system, making it available to all Node.js applications you run. The "-g" flag ensures that the package is installed globally, rather than just for the current project.
 
 Whilst in your git bash app, cd into app then run the following commands:
 
