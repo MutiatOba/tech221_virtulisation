@@ -505,9 +505,26 @@ To run a process in the backgound, type the command followed by &, so for exampl
 npm install 
 node app.js &
 ```
-NOTE: it is better to use pm2 for this.
+However, this is not a recommended way to run a Node.js app in the background as the process can terminate when you exit the terminal. To ensure that the process continues to run in the background, you can use a process manager like pm2 by using pm2 start app.js command.
 
-The provision.sh file for your app can therefore be updated as follows:
+To set up both VMs at once we need to make sure that our installation of NodeJS app.js is run as a background process. Otherwise we we get locked out of the terminal so below is a way how to fix it.
+
+ we need to change our provision shell file. The commands that we need to change are:
+```curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -```
+
+and we need to change it to:
+
+```curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -```
+
+This way we are making sure that our new version of NodeJS support pm2 start app.js command and that we wont have to use node app.js & because it might terminate the process if we exit the terminal.
+
+Next command that we need to change is:
+
+```node app.js```
+
+to:
+
+```pm2 start app.js``` - to make sure that the process is run in the background.
 
 ```
 #!/bin/bash
@@ -519,41 +536,18 @@ sudo systemctl enable nginx
 # to install dependencies for app
 sudo apt-get install nodejs -y
 sudo apt-get install python-software-properties
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+# curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install nodejs -y
 sudo npm install pm2 -g
 cd app
 npm install 
-node app.js &
-```
-To use pm2 to run the nodejs app as a background process [PROCESS TO BE REVISED AS NOT WORKING YET!]:
-
-1. make sure that you have pm2 installed: ```sudo npm install pm2 -g```
-2. [install dependencies for node.js ```npm install```] NOT REQUIRED
-3. start the app process with pm2: 
-```pm2 start app.js```
-4. To check the status of your PM2 processes: ```pm2 status```. To stop a PM2 process: ```pm2 stop your_process_name``` .
-
-```
-provision.sh file for app:
-#!/bin/bash
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt install nginx -y
-sudo systemctl restart nginx
-sudo systemctl enable nginx
-# to install dependencies for app
-sudo apt-get install nodejs -y
-sudo apt-get install python-software-properties
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install nodejs -y
-sudo npm install pm2 -g
-cd app
-#npm install &
 #node app.js &
-pm2 start app.js
-
+pm start app.js
 ```
+then type ```vagrant up``` into visual studio and head over to git bash and cd to relevant folder then ```vagrant ssh app```
+
+check that the app works by going to the ip address. 
 
 ### connecting app to db
 1. Make sure your provision file for your app is like so:
