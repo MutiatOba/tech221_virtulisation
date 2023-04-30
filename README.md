@@ -347,6 +347,7 @@ This configuration will listen on port 80 for requests to your domain and forwar
 ```
 sudo ln -s /etc/nginx/sites-available/reverse-proxy /etc/nginx/sites-enabled/
 ```
+if you make a mistake and need to unlink ```sudo unlink /etc/nginx/sites-enabled/reverse-proxy```
 
 5. check configuration file for errors
 
@@ -359,7 +360,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 ```
-7. Can now access your app from webbrowers using ip address.
+7. cd to the app folder and then ```npm start```. Now you can access your app from webbrowers using ip address.
 
 ### Naming the VM
 
