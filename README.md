@@ -502,7 +502,7 @@ end
 
 To run a process in the backgound, type the command followed by &, so for example:
 ```
-npm install &
+npm install 
 node app.js &
 ```
 NOTE: it is better to use pm2 for this.
@@ -523,7 +523,7 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install nodejs -y
 sudo npm install pm2 -g
 cd app
-npm install &
+npm install 
 node app.js &
 ```
 To use pm2 to run the nodejs app as a background process [PROCESS TO BE REVISED AS NOT WORKING YET!]:
