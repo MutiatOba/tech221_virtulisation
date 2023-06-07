@@ -1,19 +1,23 @@
-### 4 pillars of devops
+## Virtualisation
 
-1. cost: this is often ovelooked. It is best to make sure that the company is being as efficient as possible in its tech dealings. For example, not over provisioning servers when it isnt required.
+### 4 pillars of DevOps
+The four main pillars of DevOps:
 
-2. flexibilty: it's easy to get locked in to a specific product. This is known as 'vendor lock-in'. This makes it harder to keep up with industry changes. Everything the company uses should be easily changed or updated as the business needs change.
+1. Cost: this is often ovelooked. It is best to make sure that the company is being as efficient as possible in its tech dealings. For example, not over provisioning servers when it isnt required.
 
-3. ease of use: make things as easy as possible for other to do their jobs. People wont used the tools provided it they aren't easy to use. If they don't use our tools then there will be delays.
+2. Flexibilty: it's easy to get locked in to a specific product. This is known as 'vendor lock-in'. This makes it harder to keep up with industry changes. Everything the company uses should be easily changed or updated as the business needs change.
 
-4. robustness: we need as close to 100% uptime of company services as possible. We as devops engineers are responsible for this.
+3. Ease of use: make things as easy as possible for other to do their jobs. People won't used the tools provided it they aren't easy to use. If they don't use our tools then there will be delays.
+
+4. Robustness: we need as close to 100% uptime of company services as possible. We as devops engineers are responsible for this.
 
 <img width="575" alt="image" src="https://user-images.githubusercontent.com/118978642/232737052-e33159fc-2988-411f-ab84-809bea4edeb8.png">
 
-Monolith architecture - entire architeture on one pysical machine. It's better to seperate out the architecture into components working seperatley. You can split architecture into two pieces which communicate with each other. That's how you get a 2 tier application. The architecture can be broken down even further into microservices.
+### Monolith Architecture
+
+This is where the entire architeture is on one pysical machine. It's better to seperate out the architecture into components working seperatley. You can split architecture into two pieces which communicate with each other. That's how you get a 2 tier application. The architecture can be broken down even further into microservices.
 
 <img width="485" alt="image" src="https://user-images.githubusercontent.com/118978642/232739150-16751849-b428-4449-b242-68e901c0f78b.png">
-
 
 
 ### What is a virtual machine?
@@ -24,15 +28,17 @@ A vitual machine is the emulation of a computer system. Virtual machines are bas
 
 ### What is a development enviroment?
 
-A set of tools, software, and configurations used by developers to create, test, and debug software applications. It usually includes programming languages, integrated development environments (IDEs), text editors, version control systems, testing frameworks, and other tools that help developers to write, test, and deploy code. 
+It is a set of tools, software, and configurations used by developers to create, test, and debug software applications. It usually includes programming languages, integrated development environments (IDEs), text editors, version control systems, testing frameworks, and other tools that help developers to write, test, and deploy code. 
+
+### What makes a good development enviroment?
 
 <img width="572" alt="image" src="https://user-images.githubusercontent.com/118978642/232735867-fb0b0ef3-82eb-4bac-a75b-0d1608e9f60f.png">
 
-1. user friendly, fast and robust - if not people would end up usinig something else
+1. User friendly, fast and robust - if not people would end up usinig something else
 
-2. as close to the production enviroment as possible. this will do away with future errors when we come to deploy
+2. As close to the production enviroment as possible. This will do away with future errors when we come to deploy it 
 
-3. support one application. say appliction 1 requires version 1.1 of a software and then you have a second app that requiores version 1.5. then this could lead to comflicts. App1 might need a program that conflicts with App2
+3. Support one application. Let's just say that appliction 1 requires version 1.1 of a software and then you have a second application that requiores version 1.5. This could lead to comflicts as application 1 might need a program that conflicts with application 2.
 
 4. it should be the same for everyone everywhere 
 
@@ -40,7 +46,7 @@ A set of tools, software, and configurations used by developers to create, test,
 
 Vagrant allows us to achieve all 5 of these points. 
 
-### What is the purpose of the dev env?
+### What is the purpose of the development environment?
 
 It provide a separate and controlled environment for software developers to write, test, and debug their code without affecting the production environment.  It also enables them to catch and fix errors and bugs before they make it to the production environment.
 image.png
@@ -57,7 +63,7 @@ To share a dev enviroment created with vagrant, you can use Vagrant share.
 
 <img width="574" alt="image" src="https://user-images.githubusercontent.com/118978642/232735775-016f0584-18c6-42d6-b8c2-1f1504a6d03d.png">
 
-#### launch multiple vms
+#### Launch multiple vms
 
 <img width="608" alt="image" src="https://user-images.githubusercontent.com/118978642/233355477-cde9db33-d813-4408-a00c-f71b7fea1346.png">
 
@@ -66,7 +72,7 @@ Virtual box is what we use to make virtual machines.
 
 Vagrants gives the instructions to virtual box and standardises what is in the virtual box. it sends instruction to the virtual box about the type of machine that we want.
 
-### creating virtual machines with vagrant
+### Creating virtual machines with vagrant
 
 You will need to use both the terminal in your visual studio code and your Git Bash app.
 
@@ -77,7 +83,7 @@ You need to install the following:
 - git bash 
 - virtual studio code
 
-1. Cd to the correct folder in your file system. Then, in your virtual studio code type ```vagrant init``` this will create a vagrant file. this file is used to config the virtual machines on virtual box. the vagrant file is wriiten in ruby. below is the intial content of a vagrant file. note we changed the vm.box to ubuntu as this is the operating system we want to use.
+1. Cd to the correct folder in your file system. Then, in your visual studio code type ```vagrant init``` this will create a vagrant file. This file is used to config the virtual machines on virtual box. The vagrant file is wriiten in ruby. below is the intial content of a vagrant file. note we changed the vm.box to ubuntu as this is the operating system we want to use.
 ```
 Vagrant.configure("2") do |config|
 
@@ -85,11 +91,11 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-2. type ```vagrant up``` in virtual studio code. this uses the instructions in your vagrant file to create the virtual machine in virtual box 
+2. type ```vagrant up``` in vi  visual studio code. This uses the instructions in your vagrant file to create the virtual machine in virtual box 
 
 3. to access your virtual machine, go to your Git Bash, cd to the relevant folder and type ```vagrant ssh``. This takes you to your virtual machine. 
 
-4. update and upgrade your virual machine using the following linux commands (can do this in Git Bash app - can run as a script or run the individual commands):
+4. update and upgrade your virual machine using the following linux commands (you can do this in Git Bash app - can run as a script or run the individual commands):
 ```
 #!/bin/bash
 sudo apt update -y
@@ -98,11 +104,11 @@ sudo apt install nginx -y
 sudo systemctl restart nginx
 sudo systemctl enable nginx
 ```
-We first update the list of packages, then upgrade downloads the packages. the -y flag is used to automatically answer yes to any prompts that may appear. the restart command restarts NGINX service after it has been installed ensuring that any changes to the cnfiguration files or software itself takes effect. the enable command eneables nginx service to start automatically when the system boots up. so dont have to manually start the service everytime you start your machine.  
+We first update the list of packages, then upgrade downloads the packages. the -y flag is used to automatically answer yes to any prompts that may appear. The restart command restarts NGINX service after it has been installed ensuring that any changes to the cnfiguration files or software itself takes effect. The enable command eneables nginx service to start automatically when the system boots up, so you don't have to manually start the service everytime you start your machine.  
 
 NGINX is a powerful and flexible web server that has become a popular choice for serving web content, proxying requests, and load balancing traffic due to its high performance and advanced features. Think of a web server as a virtual waiter in a restaurant. When a user types a web address (URL) into their browser, it's like a customer placing an order. The browser sends a request to the web server, just as a customer would place an order with a waiter. The web server then processes the request and sends the requested web page back to the user's browser, just as a waiter would bring the requested dish to a customer's table.
 
-5. you need an ip address for your vm, to get this, you need to update your vagrant file (done in visual studio code). below we have used a private ip address. then type ```vagrant reload``` in your visual studio code then ```vagrant ssh``` in your Git Bash app. 
+5. you need an ip address for your vm, to get this, you need to update your vagrant file (done in visual studio code). Below we have used a private ip address. then type ```vagrant reload``` in your visual studio code then ```vagrant ssh``` in your Git Bash app. 
 
 ```
 Vagrant.configure("2") do |config|
@@ -112,13 +118,13 @@ Vagrant.configure("2") do |config|
 
 end
 ```
-If you have made changes to the Vagrantfile after the virtual machine has already been created and provisioned, you can apply those changes to the running virtual machine without having to stop and restart it by using the vagrant reload command. Once the virtual machine has finished reloading, you can connect to it via SSH using the command vagrant ssh.
+If you have made changes to the Vagrantfile after the virtual machine has already been created and provisioned, you can apply those changes to the running virtual machine without having to stop and restart it by using the ```vagrant reload``` command. Once the virtual machine has finished reloading, you can connect to it via SSH using the command ```vagrant ssh```.
 
 To check if your ip is working properly, type your ip address in a webbrowser. if it is working properly then you should see the nginx brand. 
 
-6. Alternatively to manual inputting the linux commands, to create a script that runs when spinning up a Vagrant virtual machine (VM), you can follow these steps (https://developer.hashicorp.com/vagrant/docs/provisioning/shell):
+6. Alternatively to manual inputting the linux commands, you can create a script that runs when spinning up a Vagrant virtual machine (VM), you can follow these steps (https://developer.hashicorp.com/vagrant/docs/provisioning/shell):
 
-- create a script file in the same folder as your vagrant file. make sure to save it as a .sh file:
+- create a script file in the same folder as your vagrant file. make sure to save it as a .sh file, I have called mine provision.sh:
 ```
 #!/bin/bash
 sudo apt update -y
